@@ -17,7 +17,7 @@ class BowlingGame
       if spare?
         score += 10 + bonus_for_spare
       else
-        score += @rolls[first_in_frame] + @rolls[first_in_frame + 1]
+        score += standard_frame_score
 
       end
        frame += 1
@@ -28,11 +28,15 @@ class BowlingGame
   end
 
   private
+  def standard_frame_score
+    @rolls[first_in_frame] + @rolls[first_in_frame + 1]
+  end
+
   def bonus_for_spare
     @rolls[first_in_frame + 2]
   end
 
   def spare?
-    @rolls[first_in_frame] + @rolls[first_in_frame + 1] == 10
+    standard_frame_score == 10
   end
 end
